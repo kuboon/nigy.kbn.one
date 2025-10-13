@@ -1,0 +1,39 @@
+{
+  "tasks": {
+    "check": "deno fmt --check && deno lint && deno check",
+    "start": "deno run -P --allow-write=.,$HOME/.cache --watch=static/,routes/ dev.ts",
+    "build": "deno run -P --allow-write=.,$HOME/.cache dev.ts build",
+    "preview": "deno serve -P _fresh/server.js",
+    "update": "deno run -A -r jsr:@fresh/update ."
+  },
+  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
+  "exclude": ["**/_fresh/*"],
+  "imports": {
+    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^1.0.0",
+    "daisyui": "npm:daisyui@^5.2.3",
+    "preact": "npm:preact@10.27.1",
+    "@preact/signals": "npm:@preact/signals@2.3.1",
+    "tailwindcss": "npm:tailwindcss@4",
+    "fresh": "jsr:@fresh/core@^2.1.2"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "lib": [
+      "deno.ns",
+      "dom"
+    ]
+  },
+  "nodeModulesDir": "auto",
+  "permissions": {
+    "default": {
+      "env": true,
+      "net": true,
+      "sys": ["cpus", "networkInterfaces", "hostname"],
+      "read": true,
+      "ffi": ["./node_modules/.deno"],
+      "run": true,
+      "write": [".", "~/.cache"]
+    }
+  }
+}

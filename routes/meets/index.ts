@@ -1,13 +1,13 @@
-import { requireUser } from "../../lib/auth.ts";
-import { errorResponse } from "../../lib/http.ts";
+import { requireUser } from "@/lib/auth.ts";
+import { errorResponse } from "@/lib/http.ts";
 import {
   appendUserMeet,
   computeLifecycle,
   saveMeet,
   saveMembership,
-} from "../../lib/meet.ts";
-import { Meet, Membership } from "../../lib/types.ts";
-import { define } from "../../util.ts";
+} from "@/lib/meet.ts";
+import { Meet, Membership } from "@/lib/types.ts";
+import { define } from "@/util.ts";
 
 function validateCapacity(capacity: unknown): number | Response {
   if (typeof capacity !== "number" || !Number.isFinite(capacity)) {

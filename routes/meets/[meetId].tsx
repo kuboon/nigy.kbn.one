@@ -1,9 +1,9 @@
-import { Head } from "fresh/runtime";
-import { errorResponse } from "../../lib/http.ts";
-import { getMeet, listMembers } from "../../lib/meet.ts";
-import { Meet, Membership } from "../../lib/types.ts";
-import { define } from "../../util.ts";
+import { errorResponse } from "@/lib/http.ts";
+import { getMeet, listMembers } from "@/lib/meet.ts";
+import { Meet, Membership } from "@/lib/types.ts";
+import { define } from "@/util.ts";
 import { page } from "fresh";
+import { Head } from "fresh/runtime";
 
 interface MeetOverviewData {
   meet: Meet;

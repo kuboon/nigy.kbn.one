@@ -1,5 +1,5 @@
-import { requireUser } from "../../../lib/auth.ts";
-import { errorResponse } from "../../../lib/http.ts";
+import { requireUser } from "@/lib/auth.ts";
+import { errorResponse } from "@/lib/http.ts";
 import {
   appendUserMeet,
   countMembers,
@@ -7,8 +7,8 @@ import {
   getMeet,
   getMembership,
   saveMembership,
-} from "../../../lib/meet.ts";
-import { define } from "../../../util.ts";
+} from "@/lib/meet.ts";
+import { define } from "@/util.ts";
 
 function ensureActiveInvitation(invitation: {
   expiresAt?: string;

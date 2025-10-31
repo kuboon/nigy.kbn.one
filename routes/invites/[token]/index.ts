@@ -1,6 +1,6 @@
-import { errorResponse } from "../../../lib/http.ts";
-import { getInvitationByToken, getMeet } from "../../../lib/meet.ts";
-import { define } from "../../../util.ts";
+import { errorResponse } from "@/lib/http.ts";
+import { getInvitationByToken, getMeet } from "@/lib/meet.ts";
+import { define } from "@/util.ts";
 
 function invitationStatus(invitation: {
   expiresAt?: string;

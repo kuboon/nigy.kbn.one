@@ -9,6 +9,7 @@
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "exclude": ["**/_fresh/*"],
   "imports": {
+    "@/": "./",
     "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^1.0.0",
     "daisyui": "npm:daisyui@^5.2.3",
     "preact": "npm:preact@^10.27.2",

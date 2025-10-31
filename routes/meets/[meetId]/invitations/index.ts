@@ -1,12 +1,12 @@
-import { requireUser } from "../../../../lib/auth.ts";
-import { errorResponse } from "../../../../lib/http.ts";
+import { requireUser } from "@/lib/auth.ts";
+import { errorResponse } from "@/lib/http.ts";
 import {
   getMeet,
   getMembership,
   listInvitations,
   saveInvitation,
-} from "../../../../lib/meet.ts";
-import { define } from "../../../../util.ts";
+} from "@/lib/meet.ts";
+import { define } from "@/util.ts";
 
 function parseExpiresAt(value: unknown): string | undefined | Response {
   if (value === undefined || value === null || value === "") return undefined;

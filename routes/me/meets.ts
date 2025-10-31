@@ -1,8 +1,8 @@
-import { requireUser } from "../../lib/auth.ts";
-import { kv } from "../../lib/kv.ts";
-import { getMeet, listMembers } from "../../lib/meet.ts";
-import { userMeetsKey } from "../../lib/keys.ts";
-import { define } from "../../util.ts";
+import { requireUser } from "@/lib/auth.ts";
+import { kv } from "@/lib/kv.ts";
+import { getMeet, listMembers } from "@/lib/meet.ts";
+import { userMeetsKey } from "@/lib/keys.ts";
+import { define } from "@/util.ts";
 
 type MeetWithParticipants = {
   meet: NonNullable<Awaited<ReturnType<typeof getMeet>>>;

@@ -1,11 +1,7 @@
-import { requireUser } from "../../../../lib/auth.ts";
-import { errorResponse } from "../../../../lib/http.ts";
-import {
-  getMeet,
-  getMembership,
-  revokeInvitation,
-} from "../../../../lib/meet.ts";
-import { define } from "../../../../util.ts";
+import { requireUser } from "@/lib/auth.ts";
+import { errorResponse } from "@/lib/http.ts";
+import { getMeet, getMembership, revokeInvitation } from "@/lib/meet.ts";
+import { define } from "@/util.ts";
 
 export const handler = define.handlers({
   async DELETE(ctx) {

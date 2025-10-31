@@ -7,7 +7,7 @@ applyTo: "**/*.{tsx,css}"
 daisyUI 5 is a CSS library for Tailwind CSS 4 daisyUI 5 provides class names for
 common UI components
 
-- [daisyUI 5 docs](http://daisyui.com)
+- [daisyUI 5 docs](https://daisyui.com)
 - [Guide: How to use this file in LLMs and code editors](https://daisyui.com/docs/editor/)
 - [daisyUI 5 release notes](https://daisyui.com/docs/v5/)
 - [daisyUI 4 to 5 upgrade guide](https://daisyui.com/docs/upgrade/)

@@ -1,4 +1,3 @@
-import { Handlers } from "fresh/server.ts";
 import { requireUser } from "../../lib/auth.ts";
 import { errorResponse } from "../../lib/http.ts";
 import {
@@ -8,6 +7,7 @@ import {
   saveMembership,
 } from "../../lib/meet.ts";
 import { Meet, Membership } from "../../lib/types.ts";
+import { define } from "../../util.ts";
 
 function validateCapacity(capacity: unknown): number | Response {
   if (typeof capacity !== "number" || !Number.isFinite(capacity)) {
@@ -27,8 +27,9 @@ function requireString(field: unknown, name: string): string | Response {
   return field;
 }
 
-export const handler: Handlers = {
-  async POST(req) {
+export const handler = define.handlers({
+  async POST(ctx) {
+    const req = ctx.req;
     const auth = await requireUser(req);
     if (auth instanceof Response) return auth;
     let payload: Record<string, unknown>;
@@ -89,4 +90,4 @@ export const handler: Handlers = {
     await appendUserMeet(auth.userId, meetId);
     return Response.json({ meet });
   },
-};
+});

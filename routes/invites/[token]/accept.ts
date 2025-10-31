@@ -1,4 +1,3 @@
-import { Handlers } from "fresh/server.ts";
 import { requireUser } from "../../../lib/auth.ts";
 import { errorResponse } from "../../../lib/http.ts";
 import {
@@ -9,6 +8,7 @@ import {
   getMembership,
   saveMembership,
 } from "../../../lib/meet.ts";
+import { define } from "../../../util.ts";
 
 function ensureActiveInvitation(invitation: {
   expiresAt?: string;
@@ -29,8 +29,9 @@ function ensureActiveInvitation(invitation: {
   return true;
 }
 
-export const handler: Handlers = {
-  async POST(req, ctx) {
+export const handler = define.handlers({
+  async POST(ctx) {
+    const req = ctx.req;
     const auth = await requireUser(req);
     if (auth instanceof Response) return auth;
     const token = ctx.params.token;
@@ -63,4 +64,4 @@ export const handler: Handlers = {
     await appendUserMeet(auth.userId, meet.id);
     return Response.json({ membership });
   },
-};
+});

@@ -1,6 +1,6 @@
-import { Handlers } from "fresh/server.ts";
 import { errorResponse } from "../../../lib/http.ts";
 import { getInvitationByToken, getMeet } from "../../../lib/meet.ts";
+import { define } from "../../../util.ts";
 
 function invitationStatus(invitation: {
   expiresAt?: string;
@@ -15,8 +15,8 @@ function invitationStatus(invitation: {
   return { isExpired, isActive };
 }
 
-export const handler: Handlers = {
-  async GET(_req, ctx) {
+export const handler = define.handlers({
+  async GET(ctx) {
     const token = ctx.params.token;
     const invitation = await getInvitationByToken(token);
     if (!invitation) return errorResponse(404, "Invitation not found");
@@ -37,4 +37,4 @@ export const handler: Handlers = {
       },
     });
   },
-};
+});

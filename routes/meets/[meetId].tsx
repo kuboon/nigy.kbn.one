@@ -1,8 +1,9 @@
-import { Head } from "fresh/runtime.ts";
-import { Handlers, PageProps } from "fresh/server.ts";
+import { Head } from "fresh/runtime";
 import { errorResponse } from "../../lib/http.ts";
 import { getMeet, listMembers } from "../../lib/meet.ts";
 import { Meet, Membership } from "../../lib/types.ts";
+import { define } from "../../util.ts";
+import { page } from "fresh";
 
 interface MeetOverviewData {
   meet: Meet;
@@ -82,8 +83,8 @@ function ParticipantCard({ participant }: { participant: Membership }) {
   );
 }
 
-export const handler: Handlers<MeetOverviewData> = {
-  async GET(_req, ctx) {
+export const handler = define.handlers<MeetOverviewData>({
+  async GET(ctx) {
     const meetId = ctx.params.meetId;
     const meet = await getMeet(meetId);
     if (!meet) {
@@ -94,13 +95,13 @@ export const handler: Handlers<MeetOverviewData> = {
       if (a.role === b.role) return a.displayName.localeCompare(b.displayName);
       return a.role === "owner" ? -1 : 1;
     });
-    return ctx.render({ meet, participants });
+    return page({ meet, participants });
   },
-};
+});
 
-export default function MeetOverview(
-  { data }: PageProps<MeetOverviewData>,
-) {
+export default define.page<typeof handler>((
+  { data },
+) => {
   const { meet, participants } = data;
   const stage = computeStage(meet);
   const memberCount = participants.length;
@@ -221,4 +222,4 @@ export default function MeetOverview(
       </main>
     </>
   );
-}
+});

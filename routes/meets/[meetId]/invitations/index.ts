@@ -1,4 +1,3 @@
-import { Handlers } from "fresh/server.ts";
 import { requireUser } from "../../../../lib/auth.ts";
 import { errorResponse } from "../../../../lib/http.ts";
 import {
@@ -7,6 +6,7 @@ import {
   listInvitations,
   saveInvitation,
 } from "../../../../lib/meet.ts";
+import { define } from "../../../../util.ts";
 
 function parseExpiresAt(value: unknown): string | undefined | Response {
   if (value === undefined || value === null || value === "") return undefined;
@@ -20,8 +20,9 @@ function parseExpiresAt(value: unknown): string | undefined | Response {
   return expires.toISOString();
 }
 
-export const handler: Handlers = {
-  async POST(req, ctx) {
+export const handler = define.handlers({
+  async POST(ctx) {
+    const req = ctx.req;
     const auth = await requireUser(req);
     if (auth instanceof Response) return auth;
     const meetId = ctx.params.meetId;
@@ -58,7 +59,8 @@ export const handler: Handlers = {
     }, { status: 201 });
   },
 
-  async GET(req, ctx) {
+  async GET(ctx) {
+    const req = ctx.req;
     const auth = await requireUser(req);
     if (auth instanceof Response) return auth;
     const meetId = ctx.params.meetId;
@@ -71,4 +73,4 @@ export const handler: Handlers = {
     const invitations = await listInvitations(meetId);
     return Response.json({ invitations });
   },
-};
+});

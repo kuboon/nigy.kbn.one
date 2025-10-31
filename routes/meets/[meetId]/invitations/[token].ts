@@ -1,14 +1,15 @@
-import { Handlers } from "fresh/server.ts";
-import { requireUser } from "../../../../../lib/auth.ts";
-import { errorResponse } from "../../../../../lib/http.ts";
+import { requireUser } from "../../../../lib/auth.ts";
+import { errorResponse } from "../../../../lib/http.ts";
 import {
   getMeet,
   getMembership,
   revokeInvitation,
-} from "../../../../../lib/meet.ts";
+} from "../../../../lib/meet.ts";
+import { define } from "../../../../util.ts";
 
-export const handler: Handlers = {
-  async DELETE(req, ctx) {
+export const handler = define.handlers({
+  async DELETE(ctx) {
+    const req = ctx.req;
     const auth = await requireUser(req);
     if (auth instanceof Response) return auth;
     const meetId = ctx.params.meetId;
@@ -28,4 +29,4 @@ export const handler: Handlers = {
     }
     return Response.json({ invitation: revoked });
   },
-};
+});

@@ -1,4 +1,4 @@
-import { Head } from "fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 
 const endpoints = [
   {
@@ -103,7 +103,9 @@ export default function Home() {
               </p>
             </header>
             <div class="grid gap-4 md:grid-cols-2">
-              {endpoints.map((endpoint) => <EndpointRow {...endpoint} />)}
+              {endpoints.map((endpoint, idx) => (
+                <EndpointRow key={idx} {...endpoint} />
+              ))}
             </div>
           </section>
 
